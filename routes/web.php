@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,10 +15,26 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function(){
-    return view('main');
+// Auth
+Route::get('/auth/signup', [AuthController::class, 'signup']);
+Route::post('/auth/register', [AuthController::class, 'register']);
+
+Route::resource('/article', ArticleController::class);
+
+Route::get('/', [MainController::class, 'index']);
+Route::get('/galery/{img}/{name}', function($img, $name) {
+    return view('main.galery', ['img'=>$img, 'name'=>$name]);
 });
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/about', function () {
+    return view('main.about');
+});
+
+Route::get('/contacts', function () {
+    $data = [
+        'city' => 'Moscow',
+        'street' => 'Semenovskaya',
+        'house' => 38,
+    ];
+    return view('main.contact', ['data' => $data]);
+});
