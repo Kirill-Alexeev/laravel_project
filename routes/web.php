@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,13 @@ Route::get('/auth/signup', [AuthController::class, 'signup']);
 Route::post('/auth/register', [AuthController::class, 'register']);
 
 Route::resource('/article', ArticleController::class);
+
+// Comment
+Route::post('/comment', [CommentController::class, 'store']);
+Route::get('/comment/{id}/edit', [CommentController::class, 'edit']);
+Route::post('/comment/{comment}/update', [CommentController::class, 'update']);
+Route::get('/comment/{id}/delete', [CommentController::class, 'delete']);
+
 
 Route::get('/', [MainController::class, 'index']);
 Route::get('/galery/{img}/{name}', function($img, $name) {

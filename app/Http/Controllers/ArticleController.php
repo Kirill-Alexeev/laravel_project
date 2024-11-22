@@ -52,7 +52,8 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         $user = User::findOrFail($article->user_id);
-        return view('article.show', ['article' => $article, 'user' => $user]);
+        $comments = $article->comments()->with('user')->get();
+        return view('article.show', ['article' => $article, 'user' => $user, 'comments' => $comments]);
     }
 
     /**
