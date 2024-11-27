@@ -9,12 +9,8 @@
     </ul>
 @endif
 
-<form action="/auth/register" method="POST">
+<form action="/auth/signin" method="POST">
     @csrf
-    <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input name="name" type="name" class="form-control" id="name">
-    </div>
     <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
         <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
@@ -24,6 +20,11 @@
         <label for="password" class="form-label">Password</label>
         <input name="password" type="password" class="form-control" id="password">
     </div>
+    <div class="mb-3">
+        <label for="check" class="form-label">Check me out</label>
+        <input name="remember" type="checkbox" id="check">
+    </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 

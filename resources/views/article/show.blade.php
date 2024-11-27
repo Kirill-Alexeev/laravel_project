@@ -59,6 +59,7 @@
     <h3 class="card-text">{{ $comment->name }}</h3>
     <p class="card-text">{{ $comment->desc }}</p>
     </div>
+    @can('update_comment', $comment)
     <div class="d-flex justify-content-center gap-3 mb-2" >
       <a href="/comment/{{$comment->id}}/edit" class="btn btn-primary">Edit comment</a>
       <form action="/comment/{{$comment->id}}/delete" method="GET">
@@ -66,6 +67,7 @@
         <button type="submit" class="btn btn-danger">Delete comment</button>
       </form>
     </div>
+    @endcan
   </div>
 @endforeach
 

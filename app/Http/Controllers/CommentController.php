@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -16,7 +18,7 @@ class CommentController extends Controller
         $comment->name = request('name');
         $comment->desc = request('desc');
         $comment->article_id = request('article_id');
-        $comment->user_id = 1;
+        $comment->user_id = Auth::id();
 
         $comment->save();
         return redirect()->back();
@@ -24,10 +26,12 @@ class CommentController extends Controller
 
     public function edit($id) {
         $comment = Comment::findOrFail($id);
+        Gate::authorize('update_comment', $comment);
         return view('comments.update', ['comment' => $comment]);
     }
 
     public function update(Request $request, Comment $comment) {
+        Gate::authorize('update_comment', $comment);
         $request->validate([
             'name' => 'required|min:3',
             'desc' => 'required|max:255'
@@ -47,6 +51,7 @@ class CommentController extends Controller
     public function delete($id)
     {
         $comment = Comment::findOrFail($id);
+        Gate::authorize('update_comment', $comment);
         if ($comment->delete()) {
             return redirect()->back()->with('status', "Delete successful!");
         } else {

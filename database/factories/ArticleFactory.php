@@ -20,7 +20,7 @@ class ArticleFactory extends Factory
             'name'=>$this->faker->sentence(),
             'date'=>$this->faker->date(),
             'desc'=>$this->faker->text(),
-            'user_id'=>\App\Models\User::factory(),
+            'user_id'=>\App\Models\User::factory()->create(),
         ];
     }
 }

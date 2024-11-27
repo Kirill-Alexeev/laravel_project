@@ -42,9 +42,19 @@
                         <li class="nav-item">
                             <a class="nav-link  active" href="/contacts">Контакты</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/auth/signup" class="btn btn-outline-success">SignUp</a>
-                        </li>
+                        @guest
+                            <li class="nav-item">
+                                <a href="/auth/signup" class="btn btn-outline-success me-3">SignUp</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/auth/login" class="btn btn-outline-success">SignIn</a>
+                            </li>
+                        @endguest
+                        @auth
+                            <li class="nav-item">
+                                <a href="/auth/logout" class="btn btn-outline-success">LogOut</a>
+                            </li>
+                        @endauth
                     </ul>
                 </div>
         </nav>
