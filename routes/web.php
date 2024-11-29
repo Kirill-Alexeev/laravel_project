@@ -32,6 +32,7 @@ Route::controller(CommentController::class)->prefix('/comment')->middleware('aut
     Route::get('/{id}/edit', 'edit');
     Route::post('/{comment}/update', 'update');
     Route::get('/{id}/delete', 'delete');
+    Route::get('/show', 'show');
 });
 
 // Main

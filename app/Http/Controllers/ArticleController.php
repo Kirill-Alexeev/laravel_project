@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
 {
@@ -30,6 +32,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', [self::class]);
         $request->validate([
             'date' => 'required|date',
             'name' => 'required|string|min:5|max:255',
@@ -69,13 +72,13 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+        Gate::authorize('update', $article->id);
         $request->validate([
             'date' => 'required|date',
             'name' => 'required|string|min:5|max:255',
             'desc' => 'required|string'
         ]);
 
-        $article = new Article();
         $article->date = $request->date;
         $article->name = $request->name;
         $article->desc = $request->desc;
@@ -94,7 +97,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-
+        Gate::authorize('delete', [self::class]);
         if ($article->delete()) {
             return redirect('/article')->with('status', "Delete successful!");
         } else {

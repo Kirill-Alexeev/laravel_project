@@ -24,6 +24,11 @@ class CommentController extends Controller
         return redirect()->back();
     }
 
+    public function show() {
+        $comments = Comment::all();
+        return view('comments.show', ['comments' => $comments]);
+    }
+
     public function edit($id) {
         $comment = Comment::findOrFail($id);
         Gate::authorize('update_comment', $comment);

@@ -26,12 +26,16 @@
     <p class="card-text">{{ $article->desc }}</p>
 
     <div class="d-flex justify-content-end gap-3">
+      @can('update', $article->id)
       <a href="/article/{{$article->id}}/edit" class="btn btn-primary">Edit article</a>
+      @endcan
+      @can('delete', $article->id)
       <form action="/article/{{$article->id}}" method="POST">
         @method("DELETE")
         @csrf
         <button type="submit" class="btn btn-danger">Delete article</button>
       </form>
+      @endcan
     </div>
   </div>
 </div>

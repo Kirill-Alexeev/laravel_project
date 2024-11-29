@@ -2,7 +2,7 @@
 @section('content')
 @use('App\Models\User', 'User')
 
-@if (session('status')) 
+@if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
     </div>
@@ -18,16 +18,15 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($articles as $article)
+        @foreach ($comments as $comment)
             <tr>
-                <th scope="row">{{$article->date}}</th>
-                <td><a href="/article/{{ $article->id }}">{{$article->name}}</a></td>
-                <td>{{$article->desc}}</td>
-                <td>{{User::findOrFail($article->user_id)->name}}</td>
+                <th scope="row">{{$comment->created_at}}</th>
+                <td>{{$comment->name}}</td>
+                <td>{{$comment->desc}}</td>
+                <td>{{User::findOrFail($comment->user_id)->name}}</td>
             </tr>
         @endforeach
     </tbody>
 </table>
-{{ $articles->links() }}
 
 @endsection
