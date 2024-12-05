@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Comment;
+use App\Events\NewArticleEvent;
 
 class ArticleController extends Controller
 {
@@ -44,7 +45,9 @@ class ArticleController extends Controller
         $article->name = $request->name;
         $article->desc = $request->desc;
         $article->user_id = 1;
-        $article->save();
+        if ($article->save()) {
+            NewArticleEvent::dispatch($article);
+        }
 
         return redirect('/article');
     }
