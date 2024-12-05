@@ -6,7 +6,7 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Log;
+use App\Models\Comment;
 
 class ArticleController extends Controller
 {
@@ -54,8 +54,8 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        $comments = Comment::where('article_id', $article->id)->where('accept', true)->get();
         $user = User::findOrFail($article->user_id);
-        $comments = $article->comments()->with('user')->get();
         return view('article.show', ['article' => $article, 'user' => $user, 'comments' => $comments]);
     }
 
