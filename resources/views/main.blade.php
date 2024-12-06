@@ -14,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Styles -->
 </head>
@@ -34,9 +35,9 @@
                             <a class="nav-link active" aria-current="page" href="/article">Articles</a>
                         </li>
                         @can('create')
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/article/create">Create article</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/article/create">Create article</a>
+                            </li>
                         @endcan
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/comment/show">Comments</a>
@@ -65,6 +66,9 @@
         </nav>
     </header>
     <main>
+        <div id="app">
+            <App />
+        </div>
         <div class="container mt-3">
             @yield('content')
         </div>
