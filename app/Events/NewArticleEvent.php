@@ -37,7 +37,7 @@ class NewArticleEvent implements ShouldBroadcast
 
     public function BroadcastWith(): array {
         return [
-            'article' => $this->article->name,
+            'article' => $this->article,
         ];
     }
 }
